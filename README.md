@@ -1,7 +1,8 @@
-# GBS script repository for Phytophthora rubi adn P. fragariae
+# GBS script repository for Phytophthora rubi and P. fragariae
 
 This site includes:
 
-- scripts for mapping reads against referecne genome
+- script for demultiplexing in sabre
+- scripts mapping reads against referecne genome using bowtie2
 - scripts for creating VCF files in GATK-HC
-- TO DO
+- R scripts for filtering variants, and population genetic analysis
