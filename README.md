@@ -2,7 +2,13 @@
 
 This site includes:
 
-- script for demultiplexing in sabre
-- scripts mapping reads against referecne genome using bowtie2
-- scripts for creating VCF files in GATK-HC
-- R scripts for filtering variants, and population genetic analysis
+**Scripts**:
+
+- Script for demultiplexing in `sabre` (Step1_sabre.sh)
+- Scripts mapping reads against reference genome using `bowtie2` (Step2_Bowtie.sh)
+- Scripts for creating VCF files in `GATK-HC` (Step3_GATK_preparation.sh and Step4_GATK_vcf.sh)
+- R scripts for filtering variants, and population genetic analysis (Step5_Data_Processing.Rmd)
+
+**Datasets**:
+- CSV file with all population information for each sample (Rub_frag_list.csv)
+- Text file with read information per sample (reads.txt)

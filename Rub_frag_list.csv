@@ -1,0 +1,184 @@
+Sample,Genus,Species,Plant Host,Collector,Country,State,Nursery,Sequencing Strategy
+4291,Phytophthora,rubi,Red Raspberry,I.Zasada,USA,WA,N10,Paired End
+4837,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N1,Single End
+4838,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N1,Paired End
+4957,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N1,Paired End
+4958,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N1,Paired End
+4959,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N1,Paired End
+4960,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N1,Paired End
+4961,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N1,Paired End
+4962,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N1,Single End
+4966,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N1,Paired End
+4967,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N1,Paired End
+4968,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N1,Paired End
+4969,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N1,Paired End
+4971,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N1,Single End
+4972,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N1,Paired End
+4973,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N1,Single End
+4975,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N1,Paired End
+4845,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N10,Paired End
+5090,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N10,Paired End
+5091,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N10,Paired End
+5093,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N10,Single End
+4798,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N2,Paired End
+4799,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N2,Paired End
+4801,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N2,Paired End
+4803,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N2,Single End
+4805,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N2,Paired End
+4807,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N2,Paired End
+4808,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N2,Paired End
+4809,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N2,Paired End
+4810,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N2,Paired End
+4811,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N2,Paired End
+4812,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N2,Paired End
+4981,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N3,Paired End
+4982,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N3,Paired End
+4983,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N3,Paired End
+4984,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N3,Single End
+4985,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N3,Paired End
+4986,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N3,Paired End
+4987,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N3,Paired End
+4988,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N3,Paired End
+4989,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N3,Paired End
+4990,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N3,Paired End
+5135,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N3,Paired End
+5136,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N3,Paired End
+5137,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N3,Paired End
+5138,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N3,Paired End
+5139,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,CA,N3,Paired End
+4813,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N4,Paired End
+4814,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N4,Paired End
+4815,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N4,Paired End
+4816,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N4,Paired End
+4817,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N4,Paired End
+4260,Phytophthora,rubi,Red Raspberry,I.Zasada,USA,OR,N5,Paired End
+4842,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N5,Paired End
+5079,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N5,Paired End
+5080,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N5,Paired End
+5081,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N5,Paired End
+5082,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N5,Paired End
+5083,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N5,Paired End
+5084,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N5,Paired End
+5085,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N5,Paired End
+5086,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N5,Paired End
+5087,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N5,Single End
+5089,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N5,Paired End
+5354,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N5,Paired End
+5355,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N5,Paired End
+5356,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N5,Paired End
+5357,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N5,Paired End
+4828,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N6,Paired End
+4829,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N6,Paired End
+4830,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N6,Paired End
+4831,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N6,Paired End
+4832,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N6,Paired End
+4976,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N6,Paired End
+4977,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N6,Paired End
+4978,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N6,Paired End
+4979,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N6,Paired End
+4980,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,OR,N6,Single End
+4993,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N7,Paired End
+4994,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N7,Paired End
+5094,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N7,Paired End
+5095,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N7,Paired End
+5293,Phytophthora,rubi,Red Raspberry,J.Tabima,USA,WA,N7,Paired End
+5294,Phytophthora,rubi,Red Raspberry,J.Tabima,USA,WA,N7,Paired End
+5295,Phytophthora,rubi,Red Raspberry,J.Tabima,USA,WA,N7,Single End
+5296,Phytophthora,rubi,Red Raspberry,J.Tabima,USA,WA,N7,Paired End
+4833,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N8,Paired End
+4834,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N8,Paired End
+4835,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N8,Paired End
+4839,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N8,Paired End
+4840,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N8,Paired End
+4992,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N8,Paired End
+5140,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N8,Single End
+5142,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N8,Paired End
+5352,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N8,Single End
+5353,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N8,Paired End
+4821,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N9,Paired End
+4822,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N9,Paired End
+4823,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N9,Paired End
+4824,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N9,Paired End
+4825,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N9,Paired End
+4826,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N9,Paired End
+4827,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N9,Paired End
+5097,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N9,Single End
+5098,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N9,Paired End
+5143,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,N9,Single End
+4584,Phytophthora,fragariae,Strawberry,M.Coffey,USA,CA,NA,Paired End
+4772,Phytophthora,fragariae,Strawberry,R.Converse,USA,OR,NA,Paired End
+4773,Phytophthora,fragariae,Strawberry,P.Reeser,USA,OR,NA,Paired End
+4775,Phytophthora,fragariae,Strawberry,P.Reeser,USA,OR,NA,Paired End
+4776,Phytophthora,fragariae,Strawberry,P.Reeser,USA,OR,NA,Paired End
+4954,Phytophthora,fragariae,Strawberry,F.Claus,England,EU,NA,Paired End
+5030,Phytophthora,fragariae,Strawberry,M.Coffey,USA,MD,NA,Paired End
+5033,Phytophthora,fragariae,Strawberry,M.Coffey,England,EU,NA,Paired End
+5034,Phytophthora,fragariae,Strawberry,M.Coffey,Scotland,EU,NA,Paired End
+5035,Phytophthora,fragariae,Strawberry,M.Coffey,England,EU,NA,Paired End
+5036,Phytophthora,fragariae,Strawberry,M.Coffey,Canada,EU,NA,Paired End
+5037,Phytophthora,fragariae,Strawberry,M.Coffey,Scotland,EU,NA,Paired End
+5038,Phytophthora,fragariae,Strawberry,M.Coffey,Scotland,EU,NA,Paired End
+5039,Phytophthora,fragariae,Strawberry,M.Coffey,Scotland,EU,NA,Paired End
+5040,Phytophthora,fragariae,Strawberry,M.Coffey,France,EU,NA,Paired End
+5041,Phytophthora,fragariae,Strawberry,M.Coffey,Scotland,EU,NA,Paired End
+5042,Phytophthora,fragariae,Strawberry,M.Coffey,Scotland,EU,NA,Paired End
+5044,Phytophthora,fragariae,Strawberry,M.Coffey,USA,OR,NA,Paired End
+5045,Phytophthora,fragariae,Strawberry,M.Coffey,USA,MD,NA,Paired End
+5046,Phytophthora,fragariae,Strawberry,M.Coffey,USA,MD,NA,Paired End
+5047,Phytophthora,fragariae,Strawberry,M.Coffey,England,EU,NA,Paired End
+5048,Phytophthora,fragariae,Strawberry,M.Coffey,Canada,BC,NA,Paired End
+5049,Phytophthora,fragariae,Strawberry,M.Coffey,Canada,BC,NA,Paired End
+5050,Phytophthora,fragariae,Strawberry,M.Coffey,USA,OR,NA,Paired End
+5052,Phytophthora,fragariae,Strawberry,M.Coffey,USA,NC,NA,Paired End
+5053,Phytophthora,fragariae,Strawberry,M.Coffey,USA,VA,NA,Paired End
+5054,Phytophthora,fragariae,Strawberry,M.Coffey,USA,VA,NA,Paired End
+5055,Phytophthora,fragariae,Strawberry,M.Coffey,USA,MD,NA,Paired End
+5056,Phytophthora,fragariae,Strawberry,M.Coffey,Scotland,EU,NA,Paired End
+5057,Phytophthora,fragariae,Strawberry,M.Coffey,Scotland,EU,NA,Paired End
+5112,Phytophthora,fragariae,Strawberry,M.Coffey,France,EU,NA,Paired End
+5113,Phytophthora,fragariae,Strawberry,M.Coffey,Switzerland,EU,NA,Paired End
+5124,Phytophthora,fragariae,Strawberry,M.Coffey,USA,OR,NA,Paired End
+5125,Phytophthora,fragariae,Strawberry,M.Coffey,USA,OR,NA,Paired End
+5261,Phytophthora,fragariae,Strawberry,M.Coffey,Germany,EU,NA,Paired End
+5262,Phytophthora,fragariae,Strawberry,M.Coffey,England,EU,NA,Paired End
+5338,Phytophthora,fragariae,Strawberry,M.Coffey,Scotland,EU,NA,Paired End
+5340,Phytophthora,fragariae,Strawberry,M.Coffey,Scotland,EU,NA,Paired End
+5341,Phytophthora,fragariae,Strawberry,M.Coffey,Scotland,EU,NA,Paired End
+5344,Phytophthora,fragariae,Strawberry,M.Coffey,USA,OR,NA,Paired End
+5347,Phytophthora,fragariae,Strawberry,M.Coffey,USA,OR,NA,Paired End
+5348,Phytophthora,fragariae,Strawberry,M.Coffey,USA,OR,NA,Paired End
+5105,Phytophthora,fragariae,Strawberry,M.Coffey,Scotland,EU,Unk,Paired End
+5111,Phytophthora,fragariae,Strawberry,M.Coffey,France,EU,Unk,Paired End
+5334,Phytophthora,fragariae,Strawberry,M.Coffey,USA,NY,Unk,Paired End
+4671,Phytophthora,rubi,Red Raspberry,K.Rosendahl,Netherlands,EU,Unk,Single End
+4836,Phytophthora,rubi,Red Raspberry,J.Stewart,England,EU,Unk,Paired End
+4953,Phytophthora,rubi,Red Raspberry,F.Claus,Scotland,EU,Unk,Single End
+5031,Phytophthora,rubi,Red Raspberry,M.Coffey,USA,NY,Unk,Paired End
+5032,Phytophthora,rubi,Red Raspberry,M.Coffey,USA,OH,Unk,Paired End
+5099,Phytophthora,rubi,Red Raspberry,M.Coffey,USA,WA,Unk,Paired End
+5100,Phytophthora,rubi,Red Raspberry,M.Coffey,USA,NY,Unk,Paired End
+5101,Phytophthora,rubi,Red Raspberry,M.Coffey,USA,NY,Unk,Paired End
+5102,Phytophthora,rubi,Red Raspberry,M.Coffey,USA,NY,Unk,Paired End
+5103,Phytophthora,rubi,Red Raspberry,M.Coffey,USA,NY,Unk,Paired End
+5104,Phytophthora,rubi,Red Raspberry,M.Coffey,Germany,EU,Unk,Paired End
+5106,Phytophthora,rubi,Red Raspberry,M.Coffey,France,EU,Unk,Single End
+5107,Phytophthora,rubi,Red Raspberry,M.Coffey,France,EU,Unk,Paired End
+5108,Phytophthora,rubi,Red Raspberry,M.Coffey,France,EU,Unk,Paired End
+5109,Phytophthora,rubi,Red Raspberry,M.Coffey,France,EU,Unk,Paired End
+5110,Phytophthora,rubi,Red Raspberry,M.Coffey,Germany,EU,Unk,Paired End
+5114,Phytophthora,rubi,Red Raspberry,M.Coffey,USA,WA,Unk,Paired End
+5115,Phytophthora,rubi,Red Raspberry,M.Coffey,USA,WA,Unk,Paired End
+5116,Phytophthora,rubi,Red Raspberry,M.Coffey,USA,WA,Unk,Paired End
+5117,Phytophthora,rubi,Red Raspberry,M.Coffey,USA,WA,Unk,Paired End
+5118,Phytophthora,rubi,Red Raspberry,M.Coffey,USA,WA,Unk,Paired End
+5119,Phytophthora,rubi,Red Raspberry,M.Coffey,USA,WA,Unk,Paired End
+5120,Phytophthora,rubi,Red Raspberry,M.Coffey,USA,WA,Unk,Paired End
+5121,Phytophthora,rubi,Red Raspberry,M.Coffey,USA,WA,Unk,Paired End
+5122,Phytophthora,rubi,Red Raspberry,M.Coffey,USA,WA,Unk,Paired End
+5123,Phytophthora,rubi,Red Raspberry,M.Coffey,USA,WA,Unk,Paired End
+5126,Phytophthora,rubi,Red Raspberry,W.Hoashi-Erhardt,USA,WA,Unk,Paired End
+5141,Phytophthora,rubi,Red Raspberry,J.Stewart,USA,WA,Unk,Paired End
+5336,Phytophthora,rubi,Red Raspberry,M.Coffey,Germany,EU,Unk,Paired End
+5343,Phytophthora,rubi,Red Raspberry,M.Coffey,USA,WA,Unk,Single End
+5350,Phytophthora,rubi,Red Raspberry,M.Coffey,Scotland,EU,Unk,Single End
+5351,Phytophthora,rubi,Red Raspberry,M.Coffey,Scotland,EU,Unk,Paired End

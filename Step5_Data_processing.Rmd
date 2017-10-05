@@ -1,0 +1,348 @@
+---
+title: "VCF file processing"
+author: "Javier F. Tabima"
+date: "10/4/2017"
+output: html_document
+---
+
+# Entire dataset
+
+## Reading the data
+```{r}
+all.vcf <- read.vcfR("all.total.vcf.gz")
+```
+
+## Filtering the data
+
+```{r}
+# Extracting the DP information
+dp.all <- extract.gt(all.vcf, element = "DP", as.numeric = T)
+
+# Filtering by quantiles: Removing the outliers in the lower 5% and higher 95% of the data
+sums <- apply(dp.all, 2, function (x) quantile(x, probs=c(0.05, 0.95), na.rm = T))
+dp.all.2 <- sweep(dp.all, MARGIN=2, FUN="-", sums[1,])
+dp.all[dp.all.2 < 0] <- NA
+dp.all.2 <- sweep(dp.all, MARGIN=2, FUN="-", sums[2,])
+dp.all[dp.all.2 > 0] <- NA
+
+# Filtering by minimum depth (DP)
+dp.all[dp.all < 4] <- NA
+
+# Removing the filtered variants by replacing the genotype of the variant with an NA
+all.vcf@gt[,-1][is.na(dp.all)] <- NA
+
+# Filtering by missing data (retaining positions where the variant is present in more than 90% of the samples)
+## Extracting the genotypes
+gt <- extract.gt(all.vcf, element = "GT")
+## Creating a mask
+data.mask <- rep(x = T, times = nrow(all.vcf@gt))
+## Masking the variant positions with more than 90% missing data
+data.mask[apply(gt, 1, function (x) sum(is.na(x))/ncol(gt)) >= 0.90] <- F
+## Saving the retained variant positions
+all.vcf <- all.vcf[data.mask %in% T,]
+
+# Filtering by maximum mapping quality score (MQ)
+## Extracting MQ values
+MQ.values <- extract.info(all.vcf, element = "MQ", as.numeric = T)
+## Creating a mask
+data.mask <- rep(x = T, times = nrow(all.vcf@gt))
+data.mask[MQ.values < 43.9] <- F
+## Saving the retained variant positions
+all.vcf <- all.vcf[data.mask %in% T,]
+
+# Retaining only the biallelic positions 
+all.vcf <- all.vcf[is.biallelic(all.vcf)]
+# Retaining only the polymorphic sites
+all.vcf <- all.vcf[is.polymorphic(all.vcf, na.omit = T),]
+
+# Saving in the filtered object in a new VCF file
+write.vcf(all.vcf,file = "filtered.vcf.gz", mask = F)
+```
+
+## Exporting the genotypes to PHYLIP
+
+```{r}
+gt.filtered <- extract.gt(all.vcf, element = "GT")
+gt.filtered[gt.filtered == "0/0"] <- 0
+gt.filtered[gt.filtered == "0/1"] <- 1
+gt.filtered[gt.filtered == "1/0"] <- 1
+gt.filtered[gt.filtered == "1/1"] <- 2
+gt.filtered[gt.filtered == "./."] <- "?"
+gt.filtered[is.na(gt.filtered)] <- "?"
+gt.df <- apply(gt.filtered, 2, function (x) paste(x, collapse = ""))
+write.table(gt.df, file = "multistate.data.phy", quote = F)
+```
+
+
+# Processing the data by species
+```{r}
+# Reading in the filtered VCF file
+all.vcf.filter <- read.vcfR("filtered.vcf.gz")
+# Removing bad samples
+all.vcf.filter@gt <- all.vcf.filter@gt[, !colnames(all.vcf.filter@gt) %in% c("4260", "4842", "4986", "4990", "4994", "5341")]
+# Loading the table of species and locations
+all.data.filter <- data.set[data.set$AccessID %in% colnames(all.vcf.filter@gt),]
+# Subsetting the dataset df according to the species
+frag.data <- all.data.filter[all.data.filter$Species %in% "fragariae", ]
+rubi.data <- all.data.filter[all.data.filter$Species %in% "rubi", ]
+# Separating the dataset df  according to location 
+rubi.data.world <- rubi.data[!rubi.data$Country %in% "USA", ]
+rubi.data.USA <- rubi.data[rubi.data$Country %in% "USA", ]
+```
+
+## FST between species
+### Nei's Gst and Hedricks G'st
+```{r}
+# Creating a data frame of species
+sub.data <- data.set[data.set$AccessID %in% colnames(all.vcf.filter@gt),c(1,5)]
+# Creating the population vector basde on the species of each sample
+pops <- sub.data[order(sub.data$AccessID, by=colnames(all.vcf.filter@gt)[-1], method = "auto"), 2]
+# Calculating the genetic distamce indices
+gen.diff <- as.data.frame(genetic_diff(all.vcf.filter, pops))
+# Mean value of each metric
+colMeans(gen.diff[,c(8:ncol(gen.diff))], na.rm = T)
+```
+
+***
+
+# Subsetting the dataset for only *P. rubi*
+```{r}
+rubi.vcf <- all.vcf.filter
+rubi.vcf@gt <- all.vcf.filter@gt[, colnames(all.vcf.filter@gt) %in% c("FORMAT", data.set[,1][data.set$Species %in% "rubi"])]
+write.vcf(rubi.vcf,file = "/Users/tabimaj/Documents/github/rubi-gbs/rubi.out.vcf.gz")
+```
+
+# GenInd
+```{r}
+library(poppr)
+library(gdata)
+library(ggtree)
+
+# Reading in VCF file
+rubi.vcf <- read.vcfR("vcf_files/rubi.out.vcf.gz")
+# Extracting the genotypes
+rubi.gt <- extract.gt(rubi.vcf)
+# Creating a genind object for the P. rubi dataset 
+gi.rubi <- vcfR2genlight(rubi.vcf[is.polymorphic(rubi.vcf, na.omit = T)])
+ploidy(gi.rubi) <- 2
+# Reading in data frame with all additional information
+data.set <- read.xls("Rub_frag_list.xlsx")
+data.set <- data.set[match(indNames(gi.rubi), data.set$AccessID), ]
+species.data <- data.set[data.set$AccessID %in% indNames(gi.rubi), ]$Species
+pop.data <- data.set[data.set$AccessID %in% indNames(gi.rubi), c('AccessID','Country','State')]
+# Assigning population information to the genind object
+pop(gi.rubi) <- pop.data$State
+```
+
+## Analysis of clonality via linkage
+```{r}
+# Index of association across P. rubi
+rubi.ia <- samp.ia(gi.rubi)
+
+# Simulated populations
+### No strcuture (admixed pops)
+sex <- glSim(133, 2563, ploid=2, LD=T)
+### Structure (clonal pops)
+clone <- glSim(133, 2563, n.snp.struc=2563, ploid=2, LD = T)
+### Semi-clonal 
+semi_clone <- glSim(133, 2563, n.snp.struc=1285, ploid=2, LD=T)
+### Most-clonal 
+most_clone <- glSim(133, 2563, n.snp.struc=1708, ploid=2, LD=T)
+
+## IA sex
+ia.sex <- samp.ia(sex,quiet = T)
+## IA clone
+ia.clone <- samp.ia(clone, quiet = T)
+## IA.semiclone
+ia.semi <- samp.ia(semi_clone, quiet = T)
+## IA.mostclone
+ia.most <- samp.ia(most_clone, quiet = T)
+
+# Summarizing data frames
+d1 <- data.frame(rubi.ia, rep("dataset", length(rubi.ia)))
+d2 <- data.frame(ia.sex, rep("sexual", length(ia.sex)))
+d3 <- data.frame(ia.clone, rep("clone", length(ia.clone)))
+d4 <- data.frame(ia.semi, rep("semi-clone", length(ia.semi)))
+d5 <- data.frame(ia.most, rep("most-clone", length(ia.semi)))
+colnames(d1) <- c("ia","dset")
+colnames(d2) <- c("ia","dset")
+colnames(d3) <- c("ia","dset")
+colnames(d4) <- c("ia","dset")
+colnames(d5) <- c("ia","dset")
+ia.total <- rbind(d1, d2, d3, d4, d5)
+
+# Normality tests
+frames <- list(as.data.frame(d1), as.data.frame(d2), as.data.frame(d3), as.data.frame(d4), as.data.frame(d5))
+normality <- list()
+for (i in 1:length(frames)){
+ normality[[i]] <- shapiro.test(frames[[i]][,'ia'])
+}
+
+# Analysis of variance
+anova.ia <- aov(lm(ia ~ dset, ia.total))
+library(agricolae)
+tukey <- HSD.test(anova.ia, "dset", alpha = 0.001)
+tukey
+# Kluskal wallis test
+kruskal.test(ia ~ dset, ia.total), trt="dset")
+k.test <- with(ia.total, kruskal(ia, dset, group = T, p.adj = "bon"))
+
+# Plot
+ggplot(ia.total,aes(dset,ia,fill=dset)) + geom_boxplot() + xlab("Dataset") + ylab("Index of association")
+```
+
+## Plotting the STRUCTURE results
+
+```{r}
+names.seq <- colnames(rubi.vcf@gt)[-1]
+ds.rub <- data.set[data.set[,1] %in% names.seq, ]
+names.seq <- paste(ds.rub$State, names.seq,  sep = "_")
+names.seq <- data.frame(names.seq, ds.rub$State)
+
+
+library(reshape)
+k2 <- melt(data.frame(names.seq, read.table("vcf_files/fast_struct/rubi_data.2.meanQ")))
+k3 <- melt(data.frame(names.seq, read.table("vcf_files/fast_struct/rubi_data.3.meanQ")))
+k4 <- melt(data.frame(names.seq, read.table("vcf_files/fast_struct/rubi_data.4.meanQ")))
+
+k2 <- k2[order(k2$ds.rub.State), ]
+k3 <- k3[order(k3$ds.rub.State), ]
+k4 <- k4[order(k4$ds.rub.State), ]
+
+library("gridExtra")
+g.k2 <- ggplot(k2, aes(x=as.character(names.seq), y=value, fill=variable)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme_bw()
+g.k3 <- ggplot(k3, aes(x=as.character(names.seq), y=value, fill=variable)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme_bw()
+g.k4 <- ggplot(k4, aes(x=as.character(names.seq), y=value, fill=variable)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme_bw()
+
+grid.arrange(g.k2, g.k3, g.k4, nrow=3)
+```
+
+## DAPC in rubi
+
+```{r}
+toRemove <- is.na(glMean(gi.rubi, alleleAsUnit = FALSE)) # TRUE where NA
+which(toRemove) # position of entirely non-typed loci
+gi.rubi.b <- gi.rubi[, !toRemove]
+pop(gi.rubi.b)
+#dapc.rubi <- dapc(gi.rubi.b, pop = pop(gi.rubi.b), n.pca = 125, n.da=2)
+#optim.a.score(dapc.rubi)
+dapc.rubi <- dapc(gi.rubi, pop = pop(gi.rubi), n.pca = 33, n.da = 2)
+# Ellipses: 95% of the data
+scatter(dapc.rubi, cellipse = 2.5)
+```
+
+# Subset of *P. rubi* from the west coast
+```{r}
+#Subset
+rubi.pnw <- rubi.vcf
+rubi.pnw@gt <- rubi.pnw@gt[,colnames(rubi.pnw@gt) %in% c("FORMAT", data.set$AccessID[!data.set$State %in% c("OH","EU","NY")])]
+rubi.pnw@gt <- rubi.pnw@gt[, !apply(rubi.pnw@gt, 2, function(x) sum(sapply(x, function (y) is.na(y)))) / nrow(rubi.pnw@gt) > 0.8]
+rubi.pnw <- rubi.pnw[apply(rubi.pnw@gt, 1, function(x) sum(sapply(x, function (y) is.na(y)))) / ncol(rubi.pnw@gt) < 0.1]
+rubi.pnw <- rubi.pnw[is.polymorphic(rubi.pnw, na.omit = T)]
+
+
+# Creating the genind object
+gi.pnw <- vcfR2genind(rubi.pnw)
+ploidy(gi.pnw) <- 2
+# Reading in data frame with all additional information
+data.set <- read.csv("Rub_frag_list.csv")
+data.set <- data.set[match(indNames(gi.pnw), data.set$Sample), ]
+species.data <- data.set[data.set$Sample %in% indNames(gi.pnw), ]$Species
+pop.data <- data.set[data.set$Sample %in% indNames(gi.pnw), c('Sample','Country','State')]
+# Assigning population information to the genind object
+pop(gi.pnw) <- pop.data$State
+```
+
+## DAPC
+```{r}
+dapc.pnw <- dapc(gi.pnw, pop = pop(gi.pnw), n.pca = 2, n.da = 2)
+scatter(dapc.pnw, cellipse = 2.5)
+compoplot(dapc.pnw)
+```
+
+
+## Genetic structure
+```{r}
+df1 <- data.set[data.set[,1] %in% colnames(rubi.pnw@gt), c('Sample','State')]
+df1 <- data.frame(df1[,1], rep(9, nrow(df1)), df1[,2])
+vcf.pops <- as.factor(as.character(df1[,3]))
+gen.dif.pnw <- pairwise_genetic_diff(rubi.pnw, vcf.pops, method = "nei")
+colMeans(gen.dif.pnw[c(4:9)], na.rm = T)
+```
+
+## AMOVA
+```{r}
+x <- clonecorrect(gi.pnw)
+x.mat <- as.matrix(x)
+x.mat[x.mat == 0] <- "1/1"
+x.mat[x.mat == 1] <- "1/2"
+x.mat[x.mat == 2] <- "2/2"
+x.gid <- df2genind(x.mat, sep = "/", ploidy = 2)
+strata(x.gid) <- data.frame(pop(gi.pnw))
+nameStrata(x.gid) <- ~Pop
+amova.gid <- poppr.amova(x.gid, ~Pop, missing = "loci")
+gid.rand <- randtest(amova.gid, nrep=999)
+```
+
+## Setting up the data for DIY-ABC
+```{r}
+# Creating the population (.pop) file required for DIYABC
+df1 <- data.set[data.set[,1] %in% colnames(rubi.pnw@gt), c('AccessID','State')]
+df1 <- data.frame(df1[,1], rep(9, nrow(df1)), df1[,2])
+colnames(df1) <- c("ID","Sex","State")
+write.table(df1, file = "vcf_files/DIYABC.pnw.pop",quote = F, sep = "\t", row.names = F, col.names = F)
+```
+
+### DIY-ABC using subset of samples (All europe, 12 CA, OR, WA) 
+
+```{r}
+rubi.diy <- rubi.vcf
+OR.subset <- data.set$AccessID[data.set$State %in% c("OR") & data.set$Species %in% "rubi"]
+WA.subset <- data.set$AccessID[data.set$State %in% c("WA") & data.set$Species %in% "rubi"]
+CA.subset <- data.set$AccessID[data.set$State %in% c("CA") & data.set$Species %in% "rubi"]
+EU.samples <- data.set$AccessID[data.set$State %in% c("EU") & data.set$Species %in% "rubi"]
+
+
+EU.samples <- EU.samples[EU.samples %in% colnames(rubi.vcf@gt)]
+OR.subset <- sample(OR.subset[OR.subset %in% colnames(rubi.vcf@gt)], size = 12)
+WA.subset <- sample(WA.subset[WA.subset %in% colnames(rubi.vcf@gt)], size = 12)
+CA.subset <- sample(CA.subset[CA.subset %in% colnames(rubi.vcf@gt)], size = 12)
+
+diy.subset<- c(OR.subset, WA.subset, CA.subset, EU.samples)
+
+rubi.diy@gt <- rubi.vcf@gt[,colnames(rubi.vcf@gt) %in% c("FORMAT", diy.subset)]
+length(colnames(rubi.diy@gt))
+# 29 samples
+
+rubi.diy <- rubi.diy[apply(rubi.diy@gt, 1, function(x) sum(sapply(x, function (y) is.na(y)))) / ncol(rubi.diy@gt) < 0.1]
+gt <- extract.gt(rubi.diy, element = "GT")
+rubi.diy <- rubi.diy[unlist(apply(gt, 1, function (x) length(unique(na.exclude(x))))) != 1]
+write.vcf(rubi.diy, file = "vcf_files/DIY_2/rubi.diy.vcf.gz")
+
+df1 <- data.set[data.set[,1] %in% colnames(rubi.diy@gt), c('AccessID','State')]
+df1 <- data.frame(df1[,1], rep(9, nrow(df1)), df1[,2])
+colnames(df1) <- c("ID","Sex","State")
+write.table(df1, file = "vcf_files/DIY_2/DIYABC.diy.pop",quote = F, sep = "\t", row.names = F, col.names = F)
+```
+
+
+# Analysis per nursery
+
+```{r}
+data.pnw <- data.set[data.set[,2] %in% indNames(gi.pnw), ]
+strata(gi.pnw) <- data.pnw[,c('State','Nursery')]
+setPop(gi.pnw) <- ~Nursery
+gi.pnw <- popsub(gi.pnw, blacklist = "Unk")
+indNames(gi.pnw) <- paste(df1$State, indNames(gi.pnw), sep = "_")
+
+# DAPC and compoplots
+dapc.nurs <- dapc(gi.pnw, n.pca = 6, n.da = 4)
+dapc.nurs$posterior <- dapc.nurs$posterior[order(rownames(dapc.nurs$posterior)), ]
+scatter(dapc.nurs)
+compoplot(dapc.nurs)
+
+# IA calculations
+poppr(gi.pnw, sample = 999)
+```
+
+
